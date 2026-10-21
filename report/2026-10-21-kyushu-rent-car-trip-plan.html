@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>규슈 3박 4일 렌터카 여행 계획</title>
+<meta name="description" content="11/27~11/30 오이타공항 인·아웃, 기타큐슈·이토시마·유후인을 렌터카로 한 바퀴 도는 4인 여행 예시 일정과 렌터카 준비 사항입니다.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Steve's Reports">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="규슈 3박 4일 렌터카 여행 계획">
+<meta property="og:description" content="11/27~11/30 오이타공항 인·아웃, 기타큐슈·이토시마·유후인을 렌터카로 한 바퀴 도는 4인 여행 예시 일정과 렌터카 준비 사항입니다.">
+<meta property="og:url" content="https://junghun9102.github.io/SteveBox/report/2026-10-21-kyushu-rent-car-trip-plan.html">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="./style.css">
+<style>
+  .route-svg .node-box { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.5; }
+  .route-svg .node-box.airport { fill: var(--surface); stroke: var(--fg); }
+  .route-svg .node-label { font: 700 14px "Pretendard Variable", Pretendard, -apple-system, sans-serif; fill: var(--fg); }
+  .route-svg .node-sub { font: 500 11px "Pretendard Variable", Pretendard, -apple-system, sans-serif; fill: var(--muted); }
+  .route-svg .leg { fill: none; stroke: var(--accent); stroke-width: 2; }
+  .route-svg .leg-label { font: 600 12px "Pretendard Variable", Pretendard, -apple-system, sans-serif; fill: var(--fg); }
+  .route-svg .via { fill: var(--surface); stroke: var(--accent); stroke-width: 2; }
+  .route-svg .via-label { font: 500 11px "Pretendard Variable", Pretendard, -apple-system, sans-serif; fill: var(--muted); }
+  .route-svg .arrow-head { fill: var(--accent); }
+  td:first-child { white-space: nowrap; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="back-link"><a href="./">&larr; 리포트 목록</a></nav>
+
+  <header class="report-header">
+    <h1>규슈 3박 4일 렌터카 여행 계획</h1>
+    <p class="meta">2026-11-27(금) ~ 11-30(월) &middot; 4인 &middot; 예시 일정 &middot; 작성 2026-10-21</p>
+    <div class="tags">
+      <span class="tag">여행 계획</span>
+      <span class="tag">규슈</span>
+      <span class="tag">렌터카</span>
+    </div>
+  </header>
+
+  <nav class="toc">
+    <div class="toc-title">목차</div>
+    <ol>
+      <li><a href="#overview">한눈에 보기</a></li>
+      <li><a href="#day1">1일차 — 11/27(금) 도착, 기타큐슈로</a></li>
+      <li><a href="#day2">2일차 — 11/28(토) 기타큐슈 → 이토시마</a></li>
+      <li><a href="#day3">3일차 — 11/29(일) 이토시마 → 유후인</a></li>
+      <li><a href="#day4">4일차 — 11/30(월) 귀국</a></li>
+      <li><a href="#rental">렌터카 계획</a></li>
+      <li><a href="#todo">확인이 필요한 것</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="overview">한눈에 보기</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>날짜</th><th>이동</th><th>주요 일정</th><th>숙소</th></tr></thead>
+      <tbody>
+        <tr><td>11/27(금)</td><td>인천 → 오이타공항 → 기타큐슈</td><td>렌터카 인수, 우사신궁, 모지코 레트로 야경</td><td>기타큐슈</td></tr>
+        <tr><td>11/28(토)</td><td>기타큐슈 → 이토시마</td><td>고쿠라성, 굴구이, 해안 드라이브, 석양</td><td>이토시마</td></tr>
+        <tr><td>11/29(일)</td><td>이토시마 → 다자이후 → 유후인</td><td>다자이후 덴만구, 유노쓰보 거리, 료칸 온천</td><td>유후시(유후인)</td></tr>
+        <tr><td>11/30(월)</td><td>유후인 → 오이타공항 → 인천</td><td>긴린코 아침 안개, 렌터카 반납</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>오이타공항에서 출발해 기타큐슈 → 이토시마 → 유후인을 한 바퀴 돌고 다시 오이타공항으로 돌아오는 순환 경로입니다. 같은 공항에서 빌리고 반납하므로 편도 반납 요금이 들지 않습니다.</p>
+
+  <div class="card scroll">
+    <svg class="route-svg" viewBox="0 0 660 300" width="100%" style="min-width:560px" role="img" aria-label="오이타공항에서 기타큐슈, 이토시마, 유후인을 거쳐 오이타공항으로 돌아오는 경로">
+      <defs>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+          <path class="arrow-head" d="M0,1 L9,5 L0,9 z"/>
+        </marker>
+      </defs>
+
+      <!-- 구간 (화살표는 구간 가운데) -->
+      <polyline class="leg" points="560,170 445,115 330,60" marker-mid="url(#arrow)"/>
+      <polyline class="leg" points="330,60 210,85 90,110" marker-mid="url(#arrow)"/>
+      <polyline class="leg" points="90,110 210,180 330,250" marker-mid="url(#arrow)"/>
+      <polyline class="leg" points="330,250 445,210 560,170" marker-mid="url(#arrow)"/>
+
+      <!-- 구간 라벨 -->
+      <text class="leg-label" x="456" y="96">1일차 · 약 1시간 40분</text>
+      <text class="leg-label" x="255" y="58" text-anchor="end">2일차 · 약 1시간 30분</text>
+      <text class="leg-label" x="196" y="206" text-anchor="end">3일차 · 약 2시간 30분</text>
+      <text class="leg-label" x="455" y="236" text-anchor="middle">4일차 · 약 1시간</text>
+
+      <!-- 들르는 곳 -->
+      <circle class="via" cx="479" cy="131" r="5"/>
+      <text class="via-label" x="472" y="152" text-anchor="end">우사신궁</text>
+      <circle class="via" cx="234" cy="194" r="5"/>
+      <text class="via-label" x="244" y="190">다자이후</text>
+
+      <!-- 숙소·공항 -->
+      <rect class="node-box airport" x="495" y="148" width="130" height="44" rx="10"/>
+      <text class="node-label" x="560" y="167" text-anchor="middle">오이타공항</text>
+      <text class="node-sub" x="560" y="184" text-anchor="middle">렌터카 인수·반납</text>
+
+      <rect class="node-box" x="265" y="38" width="130" height="44" rx="10"/>
+      <text class="node-label" x="330" y="57" text-anchor="middle">기타큐슈</text>
+      <text class="node-sub" x="330" y="74" text-anchor="middle">1박 · 11/27</text>
+
+      <rect class="node-box" x="25" y="88" width="130" height="44" rx="10"/>
+      <text class="node-label" x="90" y="107" text-anchor="middle">이토시마</text>
+      <text class="node-sub" x="90" y="124" text-anchor="middle">2박 · 11/28</text>
+
+      <rect class="node-box" x="265" y="228" width="130" height="44" rx="10"/>
+      <text class="node-label" x="330" y="247" text-anchor="middle">유후인</text>
+      <text class="node-sub" x="330" y="264" text-anchor="middle">3박 · 11/29</text>
+    </svg>
+    <p class="note">위치는 실제 지도를 단순화한 배치입니다. 이동 시간은 고속도로 기준 대략치이며, 들르는 곳에서 머무는 시간은 빠져 있습니다.</p>
+  </div>
+
+  <h2 id="day1">1일차 — 11/27(금) 도착, 기타큐슈로</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>시간</th><th>일정</th></tr></thead>
+      <tbody>
+        <tr><td>11:05</td><td>인천공항 출발</td></tr>
+        <tr><td>13:00</td><td>오이타공항 도착</td></tr>
+        <tr><td>13:00–14:00</td><td>입국 심사, 짐 찾기</td></tr>
+        <tr><td>14:00–14:40</td><td>렌터카 영업소로 셔틀 이동, 차량 인수</td></tr>
+        <tr><td>14:40–15:30</td><td>우사신궁으로 이동 (약 40분)</td></tr>
+        <tr><td>15:30–16:30</td><td>우사신궁 참배 — 전국 하치만 신사의 총본궁</td></tr>
+        <tr><td>16:30–17:40</td><td>기타큐슈로 이동 (히가시큐슈 자동차도, 약 1시간 10분)</td></tr>
+        <tr><td>18:00–</td><td>모지코 레트로에서 저녁(명물 야키카레), 간몬해협 야경. 여유가 있으면 사라쿠라야마 전망대 야경</td></tr>
+        <tr><td>숙박</td><td>기타큐슈 — 고쿠라역 또는 모지코 주변 추천</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="day2">2일차 — 11/28(토) 기타큐슈 → 이토시마</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>시간</th><th>일정</th></tr></thead>
+      <tbody>
+        <tr><td>09:00–11:00</td><td>고쿠라성, 단가시장 구경</td></tr>
+        <tr><td>11:00–12:30</td><td>이토시마로 이동 (규슈 자동차도·후쿠오카 도시고속, 약 1시간 30분)</td></tr>
+        <tr><td>12:30–14:00</td><td>점심 — 11월부터 문을 여는 굴 오두막(카키고야)에서 굴구이</td></tr>
+        <tr><td>14:00–16:00</td><td>해안 드라이브, 해변 카페 (팜비치 더 가든스 일대)</td></tr>
+        <tr><td>16:30–17:15</td><td>사쿠라이 후타미가우라 — 부부바위와 흰 도리이. 11월 말 일몰은 17:15 전후</td></tr>
+        <tr><td>숙박</td><td>이토시마</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="day3">3일차 — 11/29(일) 이토시마 → 유후인</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>시간</th><th>일정</th></tr></thead>
+      <tbody>
+        <tr><td>09:30–10:30</td><td>이토시마 아침 카페, 출발</td></tr>
+        <tr><td>10:30–11:30</td><td>다자이후로 이동 (약 1시간)</td></tr>
+        <tr><td>11:30–13:30</td><td>다자이후 덴만구, 참배길에서 우메가에모치. 늦단풍이 남아 있을 수 있음</td></tr>
+        <tr><td>13:30–15:00</td><td>유후인으로 이동 (오이타 자동차도, 약 1시간 30분)</td></tr>
+        <tr><td>15:00–17:30</td><td>유노쓰보 거리 산책, 료칸 체크인</td></tr>
+        <tr><td>저녁</td><td>료칸 온천, 가이세키 저녁</td></tr>
+        <tr><td>숙박</td><td>유후시 (유후인)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="day4">4일차 — 11/30(월) 귀국</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>시간</th><th>일정</th></tr></thead>
+      <tbody>
+        <tr><td>07:00–08:00</td><td>긴린코 호수 아침 안개 — 늦가을 쌀쌀한 아침에 잘 생김</td></tr>
+        <tr><td>08:00–10:00</td><td>아침 식사, 온천, 체크아웃</td></tr>
+        <tr><td>10:00–11:00</td><td>오이타공항 쪽으로 이동 (약 1시간)</td></tr>
+        <tr><td>11:00–11:30</td><td>공항 근처 주유소에서 기름을 가득 채우고 렌터카 반납, 셔틀로 공항 이동</td></tr>
+        <tr><td>12:00</td><td>공항 도착 — 국제선은 출발 2시간 전 도착 권장</td></tr>
+        <tr><td>14:00</td><td>오이타공항 출발 → 15:45 인천공항 도착</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout info">
+    <div class="callout-title">반납 시간 여유</div>
+    <p>렌터카 반납과 셔틀 이동에 30분 이상 걸릴 수 있습니다. 4일차는 유후인에서 늦어도 10:00에는 출발하세요.</p>
+  </div>
+
+  <h2 id="rental">렌터카 계획</h2>
+
+  <div class="table-wrap">
+    <table>
+      <tbody>
+        <tr><td><strong>인수·반납</strong></td><td>오이타공항 영업소에서 빌려 같은 곳에 반납 — 편도 반납 요금 없음</td></tr>
+        <tr><td><strong>대여 기간</strong></td><td>11/27(금) 14:00 ~ 11/30(월) 11:30, 3일(72시간 이내)</td></tr>
+        <tr><td><strong>총 운전</strong></td><td>약 6~7시간, 대부분 고속도로</td></tr>
+        <tr><td><strong>차량</strong></td><td>4명 + 캐리어 4개 기준으로 <strong>시엔타급 미니밴</strong> 또는 <strong>중형 SUV·왜건</strong> 추천</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>차 크기 고르기</h3>
+  <p>4명이 타는 것만 보면 소형차(야리스·피트급)도 되지만, 3박 짐을 실으면 트렁크가 부족합니다. 큰 캐리어가 4개라면 시엔타·프리드급 미니밴이 무난하고, 짐이 기내용 위주라면 중형 세단·SUV로도 충분합니다. 예약 화면의 "트렁크 수납 가능 캐리어 개수"를 확인하세요.</p>
+
+  <h3>예약할 때</h3>
+  <ul>
+    <li>오이타공항 영업소가 있는 회사(도요타·닛산·타임즈·오릭스 등)를 비교해 예약합니다.</li>
+    <li><strong>ETC 카드</strong> 대여를 같이 신청합니다. 고속도로 요금소를 서지 않고 지나갈 수 있습니다.</li>
+    <li>외국인 전용 <strong>규슈 고속도로 패스(KEP)</strong>: 정해진 일수 동안 규슈 고속도로를 정액으로 탈 수 있습니다. 이번 경로는 고속도로 비중이 커서 이득일 가능성이 높으니, 예약 때 가능 여부와 요금을 확인하세요.</li>
+    <li>한국어·영어 내비게이션 지원 여부를 확인합니다.</li>
+    <li>면책 보험(CDW)과 NOC(영업 손실 보상) 면제 옵션을 추천합니다.</li>
+    <li>번갈아 운전할 사람은 <strong>모두 추가 운전자로 등록</strong>합니다. 등록하지 않은 사람이 운전하면 보험이 적용되지 않습니다.</li>
+  </ul>
+
+  <h3>준비물 (운전자마다)</h3>
+  <ul>
+    <li>한국 운전면허증</li>
+    <li><strong>국제운전면허증</strong> — 출국 전 경찰서·운전면허시험장에서 발급</li>
+    <li>여권</li>
+    <li>예약할 때 쓴 신용카드 (대표 운전자)</li>
+  </ul>
+
+  <h3>운전할 때 주의</h3>
+  <div class="callout risk">
+    <div class="callout-title">좌측 통행</div>
+    <p>일본은 좌측 통행, 오른쪽 운전석입니다. 깜빡이와 와이퍼 레버 위치가 한국과 반대이고, 우회전이 비보호 좌회전처럼 맞은편 차를 가로지릅니다. 첫날 공항 주변에서 천천히 익숙해진 뒤 고속도로에 오르세요.</p>
+  </div>
+  <ul>
+    <li>일시정지 표지(<span class="pill">止まれ</span>)와 철도 건널목에서는 반드시 완전히 멈춥니다.</li>
+    <li>기타큐슈·이토시마 숙소는 주차가 유료이거나 사전 예약이 필요할 수 있습니다. 숙소 예약 때 주차 가능 여부를 확인하세요.</li>
+    <li>11월 말 유후인은 아침에 서리가 낄 수 있습니다. 보통 스노타이어는 필요 없지만 출발 전 날씨를 확인하세요.</li>
+    <li>반납 전에 기름을 가득 채웁니다. 주유 영수증을 요구할 수 있으니 버리지 마세요.</li>
+  </ul>
+
+  <h2 id="todo">확인이 필요한 것</h2>
+  <ul>
+    <li>항공편 시간과 오이타공항 국제선 운항 일정이 바뀌지 않았는지</li>
+    <li>카키고야(굴 오두막) 영업 시작일 — 보통 10월 말~11월 초에 문을 엶</li>
+    <li>숙소별 체크인 시간과 주차 가능 여부</li>
+    <li>규슈 고속도로 패스 요금과 ETC 카드 대여 가능 여부</li>
+    <li>이동 시간은 대략치입니다. 출발 전 지도 앱으로 다시 확인하세요.</li>
+  </ul>
+</div>
+</body>
+</html>
