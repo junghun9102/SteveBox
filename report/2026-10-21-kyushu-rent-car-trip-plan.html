@@ -14,7 +14,21 @@
 <meta name="twitter:card" content="summary">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
+  #trip-map { width: 100%; height: 480px; border-radius: 14px; }
+  @media (max-width: 640px) { #trip-map { height: 340px; } }
+  .map-card { padding: 0; overflow: hidden; }
+  .map-legend { padding: 14px 20px 16px; border-top: 1px solid var(--border); }
+  .map-legend ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px 18px; }
+  .map-legend li { margin: 0; font-size: 0.88rem; }
+  .swatch { display: inline-block; width: 18px; height: 4px; border-radius: 2px; vertical-align: middle; margin-right: 6px; }
+  .stop-pin { display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%;
+    color: #fff; font: 700 13px "Pretendard Variable", Pretendard, -apple-system, sans-serif; border: 2px solid #fff;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.35); }
+  .leaflet-popup-content { font: 14px/1.5 "Pretendard Variable", Pretendard, -apple-system, sans-serif; }
+  .day-route { margin: -6px 0 16px; font-size: 0.88rem; }
   .route-svg .node-box { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.5; }
   .route-svg .node-box.airport { fill: var(--surface); stroke: var(--fg); }
   .route-svg .node-label { font: 700 14px "Pretendard Variable", Pretendard, -apple-system, sans-serif; fill: var(--fg); }
@@ -45,6 +59,7 @@
     <div class="toc-title">목차</div>
     <ol>
       <li><a href="#overview">한눈에 보기</a></li>
+      <li><a href="#map">지도</a></li>
       <li><a href="#day1">1일차 — 11/27(금) 도착, 기타큐슈로</a></li>
       <li><a href="#day2">2일차 — 11/28(토) 기타큐슈 → 이토시마</a></li>
       <li><a href="#day3">3일차 — 11/29(일) 이토시마 → 유후인</a></li>
@@ -116,7 +131,76 @@
     <p class="note">위치는 실제 지도를 단순화한 배치입니다. 이동 시간은 고속도로 기준 대략치이며, 들르는 곳에서 머무는 시간은 빠져 있습니다.</p>
   </div>
 
+  <h2 id="map">지도</h2>
+  <p>번호 순서대로 들르는 곳입니다. 마커를 누르면 장소 이름과 구글 지도 링크가 나옵니다. 선은 들르는 순서를 이은 직선이라 실제 도로와 다릅니다. 실제 경로는 아래 일자별 "구글 지도 길찾기"를 눌러 확인하세요.</p>
+
+  <div class="card map-card">
+    <div id="trip-map" role="img" aria-label="규슈 여행 경유지 지도"></div>
+    <div class="map-legend">
+      <ul>
+        <li><span class="swatch" style="background:#4f46e5"></span>1일차 <a href="https://www.google.com/maps/dir/?api=1&amp;origin=Oita+Airport&amp;waypoints=Usa+Jingu%7CMojiko+Retro&amp;destination=Mount+Sarakura&amp;travelmode=driving" target="_blank" rel="noopener">길찾기</a></li>
+        <li><span class="swatch" style="background:#0891b2"></span>2일차 <a href="https://www.google.com/maps/dir/?api=1&amp;origin=Kokura+Castle&amp;destination=Sakurai+Futamigaura&amp;travelmode=driving" target="_blank" rel="noopener">길찾기</a></li>
+        <li><span class="swatch" style="background:#d97706"></span>3일차 <a href="https://www.google.com/maps/dir/?api=1&amp;origin=Sakurai+Futamigaura&amp;waypoints=Dazaifu+Tenmangu&amp;destination=Yufuin+Yunotsubo+Street&amp;travelmode=driving" target="_blank" rel="noopener">길찾기</a></li>
+        <li><span class="swatch" style="background:#db2777"></span>4일차 <a href="https://www.google.com/maps/dir/?api=1&amp;origin=Lake+Kinrin&amp;destination=Oita+Airport&amp;travelmode=driving" target="_blank" rel="noopener">길찾기</a></li>
+      </ul>
+    </div>
+  </div>
+  <p class="note">지도: &copy; OpenStreetMap 기여자, &copy; CARTO. 마커 위치는 대략적인 위치입니다.</p>
+
+  <script>
+  (function () {
+    if (!window.L) {
+      document.getElementById('trip-map').innerHTML =
+        '<p style="padding:20px;color:var(--muted)">지도를 불러오지 못했습니다. 아래 일자별 구글 지도 링크를 이용하세요.</p>';
+      return;
+    }
+    var DAY_COLORS = { 1: '#4f46e5', 2: '#0891b2', 3: '#d97706', 4: '#db2777' };
+    // [번호, 이름, 구글 지도 검색어, 위도, 경도, 일차]
+    var STOPS = [
+      [1, '오이타공항 (렌터카 인수·반납)', 'Oita Airport', 33.4794, 131.7372, 1],
+      [2, '우사신궁', 'Usa Jingu', 33.5261, 131.3739, 1],
+      [3, '모지코 레트로', 'Mojiko Retro', 33.9452, 130.9617, 1],
+      [4, '사라쿠라야마 전망대', 'Mount Sarakura', 33.8687, 130.8072, 1],
+      [5, '고쿠라성 · 단가시장', 'Kokura Castle', 33.8846, 130.8745, 2],
+      [6, '사쿠라이 후타미가우라', 'Sakurai Futamigaura', 33.6436, 130.1847, 2],
+      [7, '다자이후 덴만구', 'Dazaifu Tenmangu', 33.5194, 130.5350, 3],
+      [8, '유후인 — 유노쓰보 거리 · 긴린코 호수', 'Yufuin', 33.2658, 131.3667, 3]
+    ];
+    // 일차별로 들르는 순서 (STOPS 번호)
+    var LEGS = { 1: [1, 2, 3, 4], 2: [4, 5, 6], 3: [6, 7, 8], 4: [8, 1] };
+
+    var dark = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches;
+    var map = L.map('trip-map', { scrollWheelZoom: false, zoomSnap: 0.25 });
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/' + (dark ? 'dark_all' : 'voyager') + '/{z}/{x}/{y}{r}.png', {
+      maxZoom: 18, subdomains: 'abcd',
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+    }).addTo(map);
+
+    var byNo = {};
+    STOPS.forEach(function (s) { byNo[s[0]] = s; });
+
+    Object.keys(LEGS).forEach(function (day) {
+      var pts = LEGS[day].map(function (no) { return [byNo[no][3], byNo[no][4]]; });
+      L.polyline(pts, { color: DAY_COLORS[day], weight: 3, opacity: 0.85, dashArray: '6 6' }).addTo(map);
+    });
+
+    var bounds = [];
+    STOPS.forEach(function (s) {
+      var icon = L.divIcon({
+        className: '', iconSize: [26, 26], iconAnchor: [13, 13],
+        html: '<div class="stop-pin" style="background:' + DAY_COLORS[s[5]] + '">' + s[0] + '</div>'
+      });
+      var link = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(s[2]);
+      L.marker([s[3], s[4]], { icon: icon, title: s[1] }).addTo(map)
+        .bindPopup('<strong>' + s[0] + '. ' + s[1] + '</strong><br><a href="' + link + '" target="_blank" rel="noopener">구글 지도에서 보기</a>');
+      bounds.push([s[3], s[4]]);
+    });
+    map.fitBounds(bounds, { padding: [30, 30] });
+  })();
+  </script>
+
   <h2 id="day1">1일차 — 11/27(금) 도착, 기타큐슈로</h2>
+  <p class="day-route"><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Oita+Airport&amp;waypoints=Usa+Jingu%7CMojiko+Retro&amp;destination=Mount+Sarakura&amp;travelmode=driving" target="_blank" rel="noopener">구글 지도 길찾기 →</a> 오이타공항 → 우사신궁 → 모지코 레트로 → 사라쿠라야마</p>
   <div class="table-wrap">
     <table>
       <thead><tr><th>시간</th><th>일정</th></tr></thead>
@@ -135,6 +219,7 @@
   </div>
 
   <h2 id="day2">2일차 — 11/28(토) 기타큐슈 → 이토시마</h2>
+  <p class="day-route"><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Kokura+Castle&amp;destination=Sakurai+Futamigaura&amp;travelmode=driving" target="_blank" rel="noopener">구글 지도 길찾기 →</a> 고쿠라성 → 사쿠라이 후타미가우라</p>
   <div class="table-wrap">
     <table>
       <thead><tr><th>시간</th><th>일정</th></tr></thead>
@@ -150,6 +235,7 @@
   </div>
 
   <h2 id="day3">3일차 — 11/29(일) 이토시마 → 유후인</h2>
+  <p class="day-route"><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Sakurai+Futamigaura&amp;waypoints=Dazaifu+Tenmangu&amp;destination=Yufuin+Yunotsubo+Street&amp;travelmode=driving" target="_blank" rel="noopener">구글 지도 길찾기 →</a> 이토시마 → 다자이후 덴만구 → 유후인</p>
   <div class="table-wrap">
     <table>
       <thead><tr><th>시간</th><th>일정</th></tr></thead>
@@ -166,6 +252,7 @@
   </div>
 
   <h2 id="day4">4일차 — 11/30(월) 귀국</h2>
+  <p class="day-route"><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Lake+Kinrin&amp;destination=Oita+Airport&amp;travelmode=driving" target="_blank" rel="noopener">구글 지도 길찾기 →</a> 긴린코 호수 → 오이타공항</p>
   <div class="table-wrap">
     <table>
       <thead><tr><th>시간</th><th>일정</th></tr></thead>
