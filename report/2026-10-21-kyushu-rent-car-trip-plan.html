@@ -29,6 +29,11 @@
     box-shadow: 0 1px 4px rgba(0,0,0,0.35); }
   .leaflet-popup-content { font: 14px/1.5 "Pretendard Variable", Pretendard, -apple-system, sans-serif; }
   .day-route { margin: -6px 0 16px; font-size: 0.88rem; }
+  /* 다크모드: 밝은 OSM 타일을 반전해 어둡게 (마커·선은 그대로) */
+  @media (prefers-color-scheme: dark) {
+    #trip-map .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.9); }
+    #trip-map { background: #1a1b21; }
+  }
   .route-svg .node-box { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.5; }
   .route-svg .node-box.airport { fill: var(--surface); stroke: var(--fg); }
   .route-svg .node-label { font: 700 14px "Pretendard Variable", Pretendard, -apple-system, sans-serif; fill: var(--fg); }
@@ -145,7 +150,7 @@
       </ul>
     </div>
   </div>
-  <p class="note">지도: &copy; OpenStreetMap 기여자, &copy; CARTO. 마커 위치는 대략적인 위치입니다.</p>
+  <p class="note">지도: &copy; OpenStreetMap 기여자. 마커 위치는 대략적인 위치입니다.</p>
 
   <script>
   (function () {
@@ -169,11 +174,11 @@
     // 일차별로 들르는 순서 (STOPS 번호)
     var LEGS = { 1: [1, 2, 3, 4], 2: [4, 5, 6], 3: [6, 7, 8], 4: [8, 1] };
 
-    var dark = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches;
     var map = L.map('trip-map', { scrollWheelZoom: false, zoomSnap: 0.25 });
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/' + (dark ? 'dark_all' : 'voyager') + '/{z}/{x}/{y}{r}.png', {
-      maxZoom: 18, subdomains: 'abcd',
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+    // OpenStreetMap 공식 타일: API 키 없이 사용 (출처 표기 필수)
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> 기여자'
     }).addTo(map);
 
     var byNo = {};
