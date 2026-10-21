@@ -11,7 +11,7 @@ Claude Code 세션에서 "리포트 만들어줘", "이거 리포트로 정리�
 1. 필요한 내용을 질문합니다.
 2. 채팅에 마크다운 초안을 보여주고 확인을 받습니다.
 3. 확정되면 `report/YYYY-MM-DD-slug.html`을 만들고 목록(`report/index.html`)에 추가합니다.
-4. "올려줘"라고 요청하면 커밋·push하고 `main`으로 가는 PR을 만듭니다. PR을 머지하면 GitHub Pages에 공개됩니다.
+4. "올려줘"라고 요청하면 커밋하고 `main`에 바로 push합니다. 1~2분 뒤 GitHub Pages에 공개됩니다.
 
 ## 구조
 

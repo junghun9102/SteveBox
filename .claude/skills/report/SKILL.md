@@ -79,15 +79,24 @@ PDF가 필요하다고 하면 브라우저에서 리포트를 열고 인쇄 → 
 
 파일 생성까지는 다시 묻지 않고 진행하되, **git commit/push는 자동으로 하지 않습니다.** 사용자가 "올려줘", "공유해줘", "깃허브에 올려줘" 등으로 명시적으로 요청할 때만 진행하세요.
 
+이 저장소는 **PR 없이 `main`에 바로 push**합니다. push하는 순간 GitHub Pages로 공개되므로, push 전에 올라갈 파일을 한 번 더 확인하세요.
+
 ```bash
 git status
 git add report/<새-파일>.html report/index.html   # add -A / add . 금지
 git commit -m "리포트: <제목>"
-git push -u origin HEAD
+git fetch origin main
+git merge --no-edit origin/main       # 다른 세션이 main 에 올린 리포트를 먼저 합침
+git diff --stat origin/main..HEAD     # main 에 올라갈 파일 확인
+git push origin HEAD:main             # 공개
+git push -u origin HEAD               # 현재 브랜치도 push (클라우드 세션 작업 브랜치)
 ```
 
-- 커밋은 현재 체크아웃된 브랜치에 합니다. 클라우드 세션은 보통 세션용 작업 브랜치에서 시작합니다.
-- 현재 브랜치가 GitHub Pages 배포 브랜치(기본 `main`)가 아니면, push한 뒤 `main` 으로 가는 PR을 만들고 그 링크를 알려주세요. 머지는 사용자가 합니다.
+- 커밋은 현재 체크아웃된 브랜치에 하고, `HEAD:main`으로 `main`에 반영합니다. 클라우드 세션은 보통 세션용 작업 브랜치에서 시작하므로 이 방식이 브랜치를 바꾸지 않고도 동작합니다.
+- `git merge` 에서 `report/index.html` 이 충돌하면 양쪽 목록 항목을 모두 남기고 날짜 내림차순으로 정리한 뒤 커밋하세요. 다른 파일이 충돌하면 사용자에게 알리고 멈춥니다.
+- `git diff --stat` 결과에 이번 리포트와 무관한 파일이 있으면 push하지 말고 사용자에게 확인하세요.
+- push 후 공개 주소 `https://junghun9102.github.io/SteveBox/report/<파일명>.html` 를 알려주세요. 반영까지 1~2분 걸릴 수 있습니다.
+- `main`이 아닌 브랜치로 가는 PR은 만들지 않습니다. 사용자가 PR로 올려 달라고 하면 그때만 PR을 만듭니다.
 - force push, 다른 브랜치 삭제/리셋은 하지 않습니다.
 - GitHub Pages가 아직 켜져 있지 않다면, 저장소 Settings → Pages에서 Source를 `main` 브랜치(`/ (root)`)로 설정하도록 사용자에게 안내하세요. 이 설정은 Claude가 대신하지 않습니다. 켜진 뒤 주소는 `https://<사용자명>.github.io/<저장소명>/report/` 형태입니다.
 - 무료 플랜에서 GitHub Pages는 공개(public) 저장소에서만 동작합니다. 비공개 저장소면 사용자에게 알려주세요.
