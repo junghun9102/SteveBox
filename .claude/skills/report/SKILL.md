@@ -62,15 +62,18 @@ description: 기술 개발 계획, 회고, 조사/현황 정리 등 어떤 주�
    - `<head>`의 공유 미리보기 태그를 리포트에 맞게 채웁니다: `<title>`·`og:title`은 리포트 제목, `description`·`og:description`은 한두 문장 요약(같은 문장), `og:url`은 `https://junghun9102.github.io/SteveBox/report/<파일명>.html`. 카카오톡·슬랙에 링크를 붙였을 때 이 내용이 카드로 보입니다.
 2. 확정된 마크다운 초안을 HTML로 옮깁니다. 표, 코드블록, 리스트는 `style.css`가 이미 스타일링하므로 시맨틱 태그(`<table>`, `<pre><code>`, `<ul>` 등)만 쓰면 됩니다.
    - 표는 항상 `<div class="table-wrap">`으로 감싸세요. 모바일에서 표가 넓어도 페이지 전체가 아니라 표만 가로 스크롤됩니다.
+   - `h2`가 3개 이상이면 헤더 바로 아래에 목차(`<nav class="toc">`)를 둡니다. 모든 `h2`에 영문 kebab-case `id`를 붙이고, 목차 항목은 `h2`와 같은 순서·같은 문구로 `href="#id"`를 겁니다. `h2`가 2개 이하면 목차를 빼세요.
    - 리스크/주의사항: `<div class="callout risk">`(또는 `info`/`success`)
    - 모듈명·상태값 같은 짧은 라벨 나열: `<span class="pill">`
    - 다이어그램·범례·코드 뭉치처럼 본문과 분리된 덩어리: `<div class="card">` (넓으면 `<div class="card scroll">`)
    - 앞서 계획한 다이어그램은 이 단계에서 실제로 그립니다. 데이터가 코드/설정 파일에 있으면 그걸 실제로 읽어서 노드/엣지를 채우세요 — 손으로 나열한 다이어그램은 틀리기 쉽습니다.
-3. `report/index.html`의 `<!-- REPORT_LIST_START -->` ~ `<!-- REPORT_LIST_END -->` 사이 목록 **맨 위**에 새 항목을 추가합니다:
+3. `report/index.html`의 `<!-- REPORT_LIST_START -->` ~ `<!-- REPORT_LIST_END -->` 사이 목록 **맨 위**에 새 항목을 추가합니다. 요약은 리포트의 `description`과 같은 문장, 태그는 리포트 헤더의 `tag`와 같게 씁니다:
    ```html
-   <li><a href="./2026-09-01-flipper-release-guard-review.html"><span class="title">리포트 제목</span><span class="date">2026-09-01</span></a></li>
+   <li><a href="./2026-09-01-flipper-release-guard-review.html"><span class="title">리포트 제목</span><span class="summary">한 줄 요약</span><span class="row"><span class="date">2026-09-01</span><span class="tag">기술 개발 계획</span></span></a></li>
    ```
 4. 만든 파일 경로를 사용자에게 알려줍니다. 로컬 세션이면 브라우저로 열어서 보여줄 수 있습니다.
+
+PDF가 필요하다고 하면 브라우저에서 리포트를 열고 인쇄 → "PDF로 저장"을 안내하세요. `style.css`의 인쇄 스타일이 라이트 색으로 바꾸고, 목록 링크를 숨기고, 표·코드·콜아웃이 페이지 사이에서 잘리지 않게 처리합니다.
 
 ## 4단계 — 공유 (요청 시에만 진행)
 
