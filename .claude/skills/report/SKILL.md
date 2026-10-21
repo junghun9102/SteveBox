@@ -58,8 +58,10 @@ description: 기술 개발 계획, 회고, 조사/현황 정리 등 어떤 주�
 **저장 위치**: `report/` (저장소 루트 기준)
 **파일명 규칙**: `YYYY-MM-DD-영문-slug.html` (오늘 날짜 + 제목을 kebab-case 영문 슬러그로). 예: `report/2026-09-01-flipper-release-guard-review.html`
 
-1. `.claude/skills/report/assets/template.html`을 참고해서 새 파일을 작성합니다. 구조와 CSS 클래스(`report-header`, `meta`, `tags`/`tag`, `callout` 등)는 그대로 재사용하고, `report/style.css`를 상대경로(`./style.css`)로 링크하세요 — 매 리포트마다 스타일을 새로 만들지 않기 위함입니다.
+1. `.claude/skills/report/assets/template.html`을 참고해서 새 파일을 작성합니다. 구조와 CSS 클래스(`back-link`, `report-header`, `meta`, `tags`/`tag`, `callout` 등)는 그대로 재사용하고, `report/style.css`를 상대경로(`./style.css`)로 링크하세요 — 매 리포트마다 스타일을 새로 만들지 않기 위함입니다. Pretendard 폰트 `<link>`와 상단 `← 리포트 목록` 링크도 그대로 둡니다.
+   - `<head>`의 공유 미리보기 태그를 리포트에 맞게 채웁니다: `<title>`·`og:title`은 리포트 제목, `description`·`og:description`은 한두 문장 요약(같은 문장), `og:url`은 `https://junghun9102.github.io/SteveBox/report/<파일명>.html`. 카카오톡·슬랙에 링크를 붙였을 때 이 내용이 카드로 보입니다.
 2. 확정된 마크다운 초안을 HTML로 옮깁니다. 표, 코드블록, 리스트는 `style.css`가 이미 스타일링하므로 시맨틱 태그(`<table>`, `<pre><code>`, `<ul>` 등)만 쓰면 됩니다.
+   - 표는 항상 `<div class="table-wrap">`으로 감싸세요. 모바일에서 표가 넓어도 페이지 전체가 아니라 표만 가로 스크롤됩니다.
    - 리스크/주의사항: `<div class="callout risk">`(또는 `info`/`success`)
    - 모듈명·상태값 같은 짧은 라벨 나열: `<span class="pill">`
    - 다이어그램·범례·코드 뭉치처럼 본문과 분리된 덩어리: `<div class="card">` (넓으면 `<div class="card scroll">`)
